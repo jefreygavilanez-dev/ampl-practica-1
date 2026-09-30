@@ -1,0 +1,31 @@
+# ==========================================================================
+# Archivo: ej2.dat  (DATOS del Ejercicio 2: 3 productos y 2 plantas)
+# Nota: en las Tablas A2 y A3 las plantas están en filas; aquí los
+#       productos van en filas y las plantas en columnas (índices [i,j]).
+# ==========================================================================
+
+set PRODUCTOS := 1 2 3;
+set PLANTAS   := 1 2;
+
+# Tabla A2 - costes unitarios c[i,j] (USD/unidad)
+param c:    1   2 :=
+  1         3   4
+  2         6   5
+  3         2   3 ;
+
+# Tabla A3 - tiempos t[i,j] (horas/unidad)
+param t:    1   2 :=
+  1         4   6
+  2         4   5
+  3         3   2 ;
+
+# Tabla A3 - tiempo disponible T[j] (horas)
+param T :=
+  1  767
+  2  650 ;
+
+# Tabla A4 - demandas d[i] (unidades)
+param d :=
+  1   55
+  2   25
+  3  200 ;

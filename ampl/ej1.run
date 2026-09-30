@@ -1,0 +1,17 @@
+# ==========================================================================
+# Archivo: ej1.run  (EJECUCIÓN del Ejercicio 1)
+# Uso:  ampl: include ej1.run;
+# ==========================================================================
+reset;
+model ej1.mod;
+data  ej1.dat;
+
+option solver highs;             # también válido: cplex, gurobi, cbc
+option display_precision 10;     # mostrar más decimales (13/3 = 4.3333333333)
+
+solve;
+
+display Coste;                   # valor óptimo de la función objetivo
+display x;                       # solución óptima
+display x.rc;                    # costes reducidos
+display Restr.dual, Restr.slack; # precios sombra y holguras (verificación)

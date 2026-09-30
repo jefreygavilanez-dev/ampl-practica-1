@@ -1,0 +1,38 @@
+# ==========================================================================
+# Archivo: ej2.run  (EJECUCIÓN y ANÁLISIS DE SENSIBILIDAD del Ejercicio 2)
+# Uso:  ampl: include ej2.run;
+# ==========================================================================
+reset;
+
+# Declaración explícita de los sufijos de sensibilidad para AMPL
+suffix down;
+suffix current;
+suffix up;
+
+model ej2.mod;
+data  ej2.dat;
+
+option solver cplex;
+option cplex_options 'sensitivity';
+option display_precision 8;
+
+solve;
+
+# --- Solución y valor óptimo ---------------------------------------------
+display CosteTotal;
+display x;
+
+# --- Variables: costes reducidos y estado en la base ---------------------
+display x.rc, x.sstatus;
+
+# Muestra intervalos de coste en las variables si CPLEX los genera
+display {i in PRODUCTOS, j in PLANTAS} (x[i,j].down, x[i,j].current, x[i,j].up);
+
+# --- Restricciones: precios sombra, holguras e intervalos del término indep.
+display Capacidad.dual, Capacidad.slack, Capacidad.sstatus;
+display Demanda.dual,   Demanda.slack,   Demanda.sstatus;
+display Capacidad.down, Capacidad.current, Capacidad.up;
+display Demanda.down,   Demanda.current,   Demanda.up;
+
+# --- Horas realmente utilizadas por planta -----------------------------------
+display {j in PLANTAS} sum {i in PRODUCTOS} t[i,j]*x[i,j];
